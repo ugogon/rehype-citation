@@ -198,6 +198,7 @@ const rehypeCitationGenerator = (Cite) => {
           if (
             !options.suppressBibliography &&
             (node.tagName === 'p' || node.tagName === 'div') &&
+            node.children.length >= 1 &&
             node.children[0].value === '[^ref]'
           ) {
             parent.children[idx] = biblioNode
