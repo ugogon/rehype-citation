@@ -635,7 +635,7 @@ const genCitation = (citeproc, mode, entries, citationIdRoot, citationId, citati
     // E.g. (see Nash, 1950, pp. 12–13, 1951); (Nash, 1950; Xie, 2016)
     if (entries.length === 1) {
       // Do not link bracket
-      const output = isComposite ? `<a href="#bib-${entries[0].id.toLowerCase()}">${citationText}</a>` : `(<a href="#bib-${entries[0].id.toLowerCase()}">${citationText.slice(1, -1)}</a>)`;
+      const output = isComposite ? `<a href="#bib-${entries[0].id.toLowerCase()}">${citationText}</a>` : `${citationText.slice(0, 1)}<a href="#bib-${entries[0].id.toLowerCase()}">${citationText.slice(1, -1)}</a>${citationText.slice(-1)}`;
       return [citationText, htmlToHast(`<span class="${(inlineClass != null ? inlineClass : []).join(' ')}" id=${ids}>${output}</span>`)];
     } else {
       // Retrieve the items in the correct order and attach link each of them

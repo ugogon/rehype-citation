@@ -353,27 +353,27 @@ function _defineProperty$7(obj, key, value) {
 }
 
 function _toPropertyKey$7(arg) {
-  var key = _toPrimitive$7(arg, "string");
+  var key = _toPrimitive$7(arg, 'string');
 
-  return typeof key === "symbol" ? key : String(key);
+  return typeof key === 'symbol' ? key : String(key);
 }
 
 function _toPrimitive$7(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
+  if (typeof input !== 'object' || input === null) return input;
   var prim = input[Symbol.toPrimitive];
 
   if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    var res = prim.call(input, hint || 'default');
+    if (typeof res !== 'object') return res;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
 
-  return (hint === "string" ? String : Number)(input);
+  return (hint === 'string' ? String : Number)(input);
 }
 
 class TypeParser {
   constructor(data) {
-    _defineProperty$7(this, "validDataTypes", ['String', 'Array', 'SimpleObject', 'ComplexObject', 'Primitive']);
+    _defineProperty$7(this, 'validDataTypes', ['String', 'Array', 'SimpleObject', 'ComplexObject', 'Primitive']);
 
     this.data = data;
   }
@@ -661,22 +661,22 @@ function _defineProperty$6(obj, key, value) {
 }
 
 function _toPropertyKey$6(arg) {
-  var key = _toPrimitive$6(arg, "string");
+  var key = _toPrimitive$6(arg, 'string');
 
-  return typeof key === "symbol" ? key : String(key);
+  return typeof key === 'symbol' ? key : String(key);
 }
 
 function _toPrimitive$6(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
+  if (typeof input !== 'object' || input === null) return input;
   var prim = input[Symbol.toPrimitive];
 
   if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    var res = prim.call(input, hint || 'default');
+    if (typeof res !== 'object') return res;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
 
-  return (hint === "string" ? String : Number)(input);
+  return (hint === 'string' ? String : Number)(input);
 }
 const NAME = 1;
 const NAME_LIST = 2;
@@ -1001,22 +1001,22 @@ function _defineProperty$5(obj, key, value) {
 }
 
 function _toPropertyKey$5(arg) {
-  var key = _toPrimitive$5(arg, "string");
+  var key = _toPrimitive$5(arg, 'string');
 
-  return typeof key === "symbol" ? key : String(key);
+  return typeof key === 'symbol' ? key : String(key);
 }
 
 function _toPrimitive$5(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
+  if (typeof input !== 'object' || input === null) return input;
   var prim = input[Symbol.toPrimitive];
 
   if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    var res = prim.call(input, hint || 'default');
+    if (typeof res !== 'object') return res;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
 
-  return (hint === "string" ? String : Number)(input);
+  return (hint === 'string' ? String : Number)(input);
 }
 
 function upgradeCsl(item) {
@@ -86770,53 +86770,53 @@ const mathScriptFormatting = {
 };
 const mathScripts = {
   '^': {
-    '0': '\u2070',
-    '1': '\u00B9',
-    '2': '\u00B2',
-    '3': '\u00B3',
-    '4': '\u2074',
-    '5': '\u2075',
-    '6': '\u2076',
-    '7': '\u2077',
-    '8': '\u2078',
-    '9': '\u2079',
+    0: '\u2070',
+    1: '\u00B9',
+    2: '\u00B2',
+    3: '\u00B3',
+    4: '\u2074',
+    5: '\u2075',
+    6: '\u2076',
+    7: '\u2077',
+    8: '\u2078',
+    9: '\u2079',
     '+': '\u207A',
     '-': '\u207B',
     '=': '\u207C',
     '(': '\u207D',
     ')': '\u207E',
-    'i': '\u2071',
-    'n': '\u207F'
+    i: '\u2071',
+    n: '\u207F'
   },
-  '_': {
-    '0': '\u2080',
-    '1': '\u2081',
-    '2': '\u2082',
-    '3': '\u2083',
-    '4': '\u2084',
-    '5': '\u2085',
-    '6': '\u2086',
-    '7': '\u2087',
-    '8': '\u2088',
-    '9': '\u2089',
+  _: {
+    0: '\u2080',
+    1: '\u2081',
+    2: '\u2082',
+    3: '\u2083',
+    4: '\u2084',
+    5: '\u2085',
+    6: '\u2086',
+    7: '\u2087',
+    8: '\u2088',
+    9: '\u2089',
     '+': '\u208A',
     '-': '\u208B',
     '=': '\u208C',
     '(': '\u208D',
     ')': '\u208E',
-    'a': '\u2090',
-    'e': '\u2091',
-    'o': '\u2092',
-    'x': '\u2093',
+    a: '\u2090',
+    e: '\u2091',
+    o: '\u2092',
+    x: '\u2093',
     '\u0259': '\u2094',
-    'h': '\u2095',
-    'k': '\u2096',
-    'l': '\u2097',
-    'm': '\u2098',
-    'n': '\u2099',
-    's': '\u209A',
-    'p': '\u209B',
-    't': '\u209C'
+    h: '\u2095',
+    k: '\u2096',
+    l: '\u2097',
+    m: '\u2098',
+    n: '\u2099',
+    s: '\u209A',
+    p: '\u209B',
+    t: '\u209C'
   }
 };
 const sentenceCaseLanguages = ['american', 'british', 'canadian', 'english', 'australian', 'newzealand', 'usenglish', 'ukenglish', 'en', 'eng', 'en-au', 'en-bz', 'en-ca', 'en-cb', 'en-gb', 'en-ie', 'en-jm', 'en-nz', 'en-ph', 'en-tt', 'en-us', 'en-za', 'en-zw', 'anglais'];
@@ -86883,22 +86883,22 @@ function _defineProperty$4(obj, key, value) {
 }
 
 function _toPropertyKey$4(arg) {
-  var key = _toPrimitive$4(arg, "string");
+  var key = _toPrimitive$4(arg, 'string');
 
-  return typeof key === "symbol" ? key : String(key);
+  return typeof key === 'symbol' ? key : String(key);
 }
 
 function _toPrimitive$4(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
+  if (typeof input !== 'object' || input === null) return input;
   var prim = input[Symbol.toPrimitive];
 
   if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    var res = prim.call(input, hint || 'default');
+    if (typeof res !== 'object') return res;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
 
-  return (hint === "string" ? String : Number)(input);
+  return (hint === 'string' ? String : Number)(input);
 }
 const identifier = /[a-zA-Z_][a-zA-Z0-9_:-]*/;
 const whitespace = {
@@ -87406,8 +87406,8 @@ const MONTHS = {
   december: 12
 };
 const TYPE_KEYS = {
-  bathesis: 'Bachelor\'s thesis',
-  mathesis: 'Master\'s thesis',
+  bathesis: "Bachelor's thesis",
+  mathesis: "Master's thesis",
   phdthesis: 'PhD thesis',
   candthesis: 'Candidate thesis',
   techreport: 'technical report',
@@ -88441,7 +88441,7 @@ var bibtex = new Translator([{
       if (subType) {
         return [type, subType];
       } else if (sourceType === 'mastersthesis') {
-        return [type, 'Master\'s thesis'];
+        return [type, "Master's thesis"];
       } else if (sourceType === 'phdthesis') {
         return [type, 'PhD thesis'];
       } else {
@@ -88533,22 +88533,22 @@ function _defineProperty$3(obj, key, value) {
 }
 
 function _toPropertyKey$3(arg) {
-  var key = _toPrimitive$3(arg, "string");
+  var key = _toPrimitive$3(arg, 'string');
 
-  return typeof key === "symbol" ? key : String(key);
+  return typeof key === 'symbol' ? key : String(key);
 }
 
 function _toPrimitive$3(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
+  if (typeof input !== 'object' || input === null) return input;
   var prim = input[Symbol.toPrimitive];
 
   if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    var res = prim.call(input, hint || 'default');
+    if (typeof res !== 'object') return res;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
 
-  return (hint === "string" ? String : Number)(input);
+  return (hint === 'string' ? String : Number)(input);
 }
 
 const BOOK = new Set(['book', 'inbook', 'bookinbook', 'suppbook']);
@@ -88707,22 +88707,22 @@ function _defineProperty$2(obj, key, value) {
 }
 
 function _toPropertyKey$2(arg) {
-  var key = _toPrimitive$2(arg, "string");
+  var key = _toPrimitive$2(arg, 'string');
 
-  return typeof key === "symbol" ? key : String(key);
+  return typeof key === 'symbol' ? key : String(key);
 }
 
 function _toPrimitive$2(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
+  if (typeof input !== 'object' || input === null) return input;
   var prim = input[Symbol.toPrimitive];
 
   if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    var res = prim.call(input, hint || 'default');
+    if (typeof res !== 'object') return res;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
 
-  return (hint === "string" ? String : Number)(input);
+  return (hint === 'string' ? String : Number)(input);
 }
 
 function _parse(input, spec) {
@@ -88928,22 +88928,22 @@ function _defineProperty$1(obj, key, value) {
 }
 
 function _toPropertyKey$1(arg) {
-  var key = _toPrimitive$1(arg, "string");
+  var key = _toPrimitive$1(arg, 'string');
 
-  return typeof key === "symbol" ? key : String(key);
+  return typeof key === 'symbol' ? key : String(key);
 }
 
 function _toPrimitive$1(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
+  if (typeof input !== 'object' || input === null) return input;
   var prim = input[Symbol.toPrimitive];
 
   if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    var res = prim.call(input, hint || 'default');
+    if (typeof res !== 'object') return res;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
 
-  return (hint === "string" ? String : Number)(input);
+  return (hint === 'string' ? String : Number)(input);
 }
 const commandKeywords = {
   '\\begin': 'commandBegin',
@@ -89484,22 +89484,22 @@ function _defineProperty(obj, key, value) {
 }
 
 function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, "string");
+  var key = _toPrimitive(arg, 'string');
 
-  return typeof key === "symbol" ? key : String(key);
+  return typeof key === 'symbol' ? key : String(key);
 }
 
 function _toPrimitive(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
+  if (typeof input !== 'object' || input === null) return input;
   var prim = input[Symbol.toPrimitive];
 
   if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    var res = prim.call(input, hint || 'default');
+    if (typeof res !== 'object') return res;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
 
-  return (hint === "string" ? String : Number)(input);
+  return (hint === 'string' ? String : Number)(input);
 }
 
 function validate(entries, requirements) {
