@@ -1,6 +1,6 @@
 import { util } from '../../core/index.js'
 import { format as formatDate } from '@citation-js/date'
-import types from './bibtexTypes.js'
+import types from './bibtexTypes.json'
 import { TYPE, LABEL, Converters } from './shared.js'
 export default new util.Translator([
   {
@@ -126,7 +126,7 @@ export default new util.Translator([
   },
   {
     source: LABEL,
-    target: ['id', 'citation-label', 'author', 'issued', 'year-suffix', 'title'],
+    target: ['id', 'citation-key', 'author', 'issued', 'year-suffix', 'title'],
     convert: Converters.LABEL,
   },
   {
@@ -140,13 +140,13 @@ export default new util.Translator([
         issue(issue) {
           return typeof issue === 'number' || (typeof issue === 'string' && issue.match(/\d+/))
         },
-
         type: [
           'article',
           'article-journal',
           'article-newspaper',
           'article-magazine',
           'paper-conference',
+          'periodical',
         ],
       },
     },
@@ -175,15 +175,7 @@ export default new util.Translator([
   {
     source: 'pages',
     target: 'page',
-    convert: {
-      toTarget(text) {
-        return text.replace(/[–—]/, '-')
-      },
-
-      toSource(text) {
-        return text.replace('-', '--')
-      },
-    },
+    convert: Converters.PAGES,
   },
   {
     source: 'publisher',
@@ -200,12 +192,17 @@ export default new util.Translator([
           'book',
           'broadcast',
           'chapter',
+          'classic',
+          'collection',
           'dataset',
+          'document',
           'entry',
           'entry-dictionary',
           'entry-encyclopedia',
+          'event',
           'figure',
           'graphic',
+          'hearing',
           'interview',
           'legal_case',
           'legislation',
@@ -214,13 +211,18 @@ export default new util.Translator([
           'musical_score',
           'pamphlet',
           'patent',
+          'performance',
+          'periodical',
           'personal_communication',
           'post',
           'post-weblog',
+          'regulation',
           'review',
           'review-book',
+          'software',
           'song',
           'speech',
+          'standard',
           'treaty',
           'webpage',
         ],
@@ -294,8 +296,7 @@ export default new util.Translator([
     target: ['type', 'genre'],
     convert: {
       toTarget(sourceType, subType) {
-        const type = types.source[sourceType] || 'book'
-
+        const type = types.source[sourceType] || 'document'
         if (subType) {
           return [type, subType]
         } else if (sourceType === 'mastersthesis') {
@@ -306,10 +307,8 @@ export default new util.Translator([
           return [type]
         }
       },
-
       toSource(targetType, genre) {
         const type = types.target[targetType] || 'misc'
-
         if (/^(master'?s|diploma) thesis$/i.test(genre)) {
           return ['mastersthesis']
         } else if (/^(phd|doctoral) thesis$/i.test(genre)) {

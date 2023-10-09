@@ -1,3 +1,4 @@
+//@ts-nocheck
 /**
  * @typedef {import('hast').Node} Node
  * @typedef {import('hast').Parent} Parent

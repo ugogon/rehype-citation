@@ -1,6 +1,6 @@
 import { util } from '../../core/index.js'
 import { format as formatDate } from '@citation-js/date'
-import types from './biblatexTypes.js'
+import types from './biblatexTypes.json'
 import { TYPE, LABEL, TYPE_KEYS, Converters } from './shared.js'
 const nonSpec = [
   {
@@ -10,6 +10,7 @@ const nonSpec = [
       source: false,
       target: {
         note: false,
+        addendum: false,
       },
     },
     convert: {
@@ -36,7 +37,6 @@ const nonSpec = [
         eprinttype(type) {
           return type !== 'pmid'
         },
-
         archiveprefix(type) {
           return type !== 'pmid'
         },
@@ -49,6 +49,20 @@ const nonSpec = [
     target: 'PMCID',
     when: {
       target: false,
+    },
+  },
+  {
+    source: 's2id',
+    target: 'custom',
+    convert: {
+      toTarget(S2ID) {
+        return {
+          S2ID,
+        }
+      },
+      toSource({ S2ID }) {
+        return S2ID
+      },
     },
   },
 ]
@@ -165,9 +179,8 @@ export default new util.Translator([
       },
       target: {
         'number-of-volumes': false,
-
         type(type) {
-          return !type.startsWith('article')
+          return !type || !type.startsWith('article')
         },
       },
     },
@@ -291,22 +304,18 @@ export default new util.Translator([
     convert: {
       toTarget(type, subtype, typeKey) {
         if (!typeKey) {
-          if (type === 'masterthesis') {
+          if (type === 'mastersthesis') {
             typeKey = 'mathesis'
           }
-
           if (type === 'phdthesis') {
             typeKey = 'phdthesis'
           }
-
           if (type === 'techreport') {
             typeKey = 'techreport'
           }
         }
-
-        return [types.source[type] || 'book', typeKey || subtype]
+        return [types.source[type] || 'document', typeKey || subtype]
       },
-
       toSource(type, genre) {
         const sourceType = types.target[type] || 'misc'
         return genre in TYPE_KEYS ? [sourceType, undefined, genre] : [sourceType, genre]
@@ -336,12 +345,24 @@ export default new util.Translator([
     target: 'event-place',
   },
   {
-    source: 'eventtitle',
+    source: ['eventtitle', 'eventtitleaddon'],
+    target: 'event-title',
+    convert: Converters.EVENT_TITLE,
+  },
+  {
+    source: ['eventtitle', 'eventtitleaddon'],
     target: 'event',
+    convert: Converters.EVENT_TITLE,
+    when: {
+      source: false,
+      target: {
+        'event-title': false,
+      },
+    },
   },
   {
     source: LABEL,
-    target: ['id', 'citation-label', 'author', 'issued', 'year-suffix', 'title'],
+    target: ['id', 'citation-key', 'author', 'issued', 'year-suffix', 'title'],
     convert: Converters.LABEL,
   },
   {
@@ -364,8 +385,7 @@ export default new util.Translator([
         issue(issue) {
           return typeof issue === 'string' && !issue.match(/\d+/)
         },
-
-        type: ['article', 'article-journal', 'article-newspaper', 'article-magazine'],
+        type: ['article', 'article-journal', 'article-newspaper', 'article-magazine', 'periodical'],
       },
     },
   },
@@ -380,13 +400,13 @@ export default new util.Translator([
         issue(issue) {
           return issue && (typeof issue === 'number' || issue.match(/\d+/))
         },
-
         type: [
           'article',
           'article-journal',
           'article-newspaper',
           'article-magazine',
           'paper-conference',
+          'periodical',
         ],
       },
     },
@@ -430,8 +450,37 @@ export default new util.Translator([
     convert: Converters.PICK,
   },
   {
+    source: 'langid',
+    target: 'language',
+    when: {
+      source: {
+        language: false,
+      },
+      target: false,
+    },
+  },
+  {
     source: 'note',
     target: 'note',
+  },
+  {
+    source: 'addendum',
+    target: 'note',
+    when: {
+      source: {
+        note: false,
+      },
+      target: false,
+    },
+  },
+  {
+    source: 'eid',
+    target: 'number',
+    when: {
+      target: {
+        type: ['article-journal'],
+      },
+    },
   },
   {
     source: ['isan', 'ismn', 'isrn', 'iswc'],
@@ -482,21 +531,22 @@ export default new util.Translator([
     target: 'original-title',
   },
   {
-    source: ['pages', 'eid'],
+    source: 'pages',
     target: 'page',
-    convert: {
-      toTarget(pages, eid) {
-        return eid ? eid.replace(/^e?/i, 'e') : pages.replace(/[–—]/, '-')
-      },
-
-      toSource(page) {
-        return /^e/i.test(page) ? [page, page] : [page.replace('-', '--')]
+    when: {
+      source: {
+        bookpagination: [undefined, 'page'],
       },
     },
+    convert: Converters.PAGES,
   },
   {
     source: 'pagetotal',
     target: 'number-of-pages',
+  },
+  {
+    source: 'part',
+    target: 'part-number',
   },
   {
     source: ['eprint', 'eprinttype'],
@@ -524,12 +574,17 @@ export default new util.Translator([
           'book',
           'broadcast',
           'chapter',
+          'classic',
+          'collection',
           'dataset',
+          'document',
           'entry',
           'entry-dictionary',
           'entry-encyclopedia',
+          'event',
           'figure',
           'graphic',
+          'hearing',
           'interview',
           'legal_case',
           'legislation',
@@ -540,14 +595,18 @@ export default new util.Translator([
           'pamphlet',
           'paper-conference',
           'patent',
+          'performance',
+          'periodical',
           'personal_communication',
           'post',
           'post-weblog',
           'regulation',
           'review',
           'review-book',
+          'software',
           'song',
           'speech',
+          'standard',
           'treaty',
         ],
       },
@@ -610,7 +669,6 @@ export default new util.Translator([
       toTarget(section) {
         return section
       },
-
       toSource(section) {
         return [section, 'section']
       },
@@ -624,6 +682,16 @@ export default new util.Translator([
   {
     source: 'shorttitle',
     target: 'title-short',
+  },
+  {
+    source: 'shorttitle',
+    target: 'shortTitle',
+    when: {
+      source: false,
+      target: {
+        'title-short': false,
+      },
+    },
   },
   {
     source: ['title', 'subtitle', 'titleaddon'],
@@ -661,5 +729,10 @@ export default new util.Translator([
   {
     source: 'volumes',
     target: 'number-of-volumes',
+  },
+  {
+    source: ['issuetitle', 'issuesubtitle', 'issuetitleaddon'],
+    target: 'volume-title',
+    convert: Converters.TITLE,
   },
 ])
